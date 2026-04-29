@@ -5,6 +5,8 @@ import HowWeBuild from "./components/HowWeBuild";
 import IndustriesWeWorkWith from "./components/IndustriesWeWorkWith";
 import SupportingCapabilities from "./components/SupportingCapabilities";
 import CTABanner from "./components/CTABanner";
+import Founders from "./components/Founders";
+import Careers from "./components/Careers";
 import ContactUs from "./components/ContactUs";
 
 export default function Home() {
@@ -17,6 +19,8 @@ export default function Home() {
       <IndustriesWeWorkWith />
       <SupportingCapabilities />
       <CTABanner />
+      <Founders />
+      <Careers />
       <ContactUs />
     </main>
   );

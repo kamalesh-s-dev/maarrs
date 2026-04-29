@@ -398,7 +398,7 @@ export default function WhatWeBuild() {
         }
       `}</style>
 
-      <section ref={sectionRef} className="wwb-section">
+      <section id="about" ref={sectionRef} className="wwb-section">
 
         {/* Scattered background dots — animated by GSAP */}
         {[

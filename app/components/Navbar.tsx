@@ -21,9 +21,9 @@ export default function Navbar() {
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-9">
           <Link href="/" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">Home</Link>
-          <Link href="/about" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">About</Link>
-          <Link href="/services" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">Services</Link>
-          <Link href="/blog" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">Blog</Link>
+          <Link href="#about" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">About</Link>
+          <Link href="#founders" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">Founders</Link>
+          <Link href="#careers" className="text-[15px] font-medium text-slate-700 hover:text-[#009FE3] transition-colors duration-300 tracking-wide">Careers</Link>
         </div>
 
         {/* Call to Action and Mobile Toggle */}
@@ -53,9 +53,9 @@ export default function Navbar() {
       {isOpen && (
         <div className="absolute top-[110%] left-4 right-4 bg-white/95 backdrop-blur-xl border border-white/40 shadow-xl rounded-2xl p-5 flex flex-col gap-4 md:hidden">
           <Link onClick={() => setIsOpen(false)} href="/" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">Home</Link>
-          <Link onClick={() => setIsOpen(false)} href="/about" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">About</Link>
-          <Link onClick={() => setIsOpen(false)} href="/services" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">Services</Link>
-          <Link onClick={() => setIsOpen(false)} href="/blog" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">Blog</Link>
+          <Link onClick={() => setIsOpen(false)} href="#about" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">About</Link>
+          <Link onClick={() => setIsOpen(false)} href="#founders" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">Founders</Link>
+          <Link onClick={() => setIsOpen(false)} href="#careers" className="text-base font-semibold text-slate-700 hover:text-[#009FE3]">Careers</Link>
           <hr className="border-gray-200" />
           <Link onClick={() => setIsOpen(false)} href="#contact" className="text-center py-3 bg-[#009FE3] text-white font-semibold rounded-xl shadow-md">
             Get Started

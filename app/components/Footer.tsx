@@ -85,9 +85,9 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
             
             {/* Column 1 — Brand & Intro */}
-            <div className="md:col-span-5 flex flex-col gap-6">
+            <div className="md:col-span-6 flex flex-col gap-6">
               <Link href="/" className="inline-flex items-center">
-                <Image src="/logo.png" alt="MAARRS Logo" width={140} height={42} className="object-contain h-10 w-auto" />
+                <Image src="/logo.png" alt="MAARRS Logo" width={180} height={54} className="object-contain h-14 w-auto" />
               </Link>
               <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
                 MAARRS designs and builds custom technology platforms that help organisations operate, scale, and evolve through structured digital systems aligned to real business needs.
@@ -112,35 +112,29 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 2 — Platforms */}
-            <div className="md:col-span-2 flex flex-col gap-5">
-              <h4 className="text-[#0f172a] font-bold text-base tracking-tight">Platforms</h4>
-              <nav className="flex flex-col gap-3">
-                <Link href="#platforms" className="ftr-link">Operational</Link>
-                <Link href="#platforms" className="ftr-link">Industry</Link>
-                <Link href="#platforms" className="ftr-link">Workflow</Link>
-                <Link href="#platforms" className="ftr-link">Enterprise</Link>
-              </nav>
-            </div>
-
-            {/* Column 3 — Navigation */}
-            <div className="md:col-span-2 flex flex-col gap-5">
+            {/* Column 2 — Navigation */}
+            <div className="md:col-span-3 flex flex-col gap-5">
               <h4 className="text-[#0f172a] font-bold text-base tracking-tight">Company</h4>
               <nav className="flex flex-col gap-3">
                 <Link href="/" className="ftr-link">Home</Link>
-                <Link href="#industries" className="ftr-link">Industries</Link>
-                <Link href="#process" className="ftr-link">Our Process</Link>
-                <Link href="#contact" className="ftr-link">Contact Us</Link>
+                <Link href="#about" className="ftr-link">About</Link>
+                <Link href="#founders" className="ftr-link">Founders</Link>
+                <Link href="#careers" className="ftr-link">Careers</Link>
               </nav>
             </div>
 
-            {/* Column 4 — Contact */}
+            {/* Column 3 — Contact */}
             <div className="md:col-span-3 flex flex-col gap-5">
               <h4 className="text-[#0f172a] font-bold text-base tracking-tight">Get in Touch</h4>
               <div className="flex flex-col gap-3">
                 <a href="mailto:hello@maarrs.com" className="ftr-link">hello@maarrs.com</a>
-                <a href="tel:+91XXXXXXXXXX" className="ftr-link">+91 XXXXX XXXXX</a>
-                <span className="text-gray-500 text-sm mt-1">Global Headquarters<br/>India</span>
+                <a href="tel:+918754799981" className="ftr-link">+91 87547 99981</a>
+                <span className="text-gray-500 text-sm mt-1 leading-relaxed">
+                  14/11, Balaji Garden Extn,<br/>
+                  Subramaniyam Palayam,<br/>
+                  GN mills post, Coimbatore North,<br/>
+                  Tamilnadu- 641029
+                </span>
               </div>
             </div>
 
