@@ -1,126 +1,86 @@
 "use client";
 
-import { useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 interface Industry {
   title: string;
   description: string;
-  bgColor: string;
-  imagePlaceholder: string;
+  imageSrc: string;
 }
 
-const industries: Industry[] = [
+const INDUSTRIES: Industry[] = [
   {
     title: "Emerging Digital Businesses",
     description: "Scalable systems built for modern digital-first businesses.",
-    bgColor: "#009FE3",
-    imagePlaceholder: "Digital"
+    imageSrc: "/Image (Emerging Digital Businesses).png",
   },
   {
     title: "Education & Training",
     description: "Platforms supporting structured learning and institutional operations.",
-    bgColor: "#0f172a",
-    imagePlaceholder: "Education"
+    imageSrc: "/Image (Education & Coaching).png",
   },
   {
     title: "Healthcare & Medical",
     description: "Operational systems designed around clinical and administrative workflows.",
-    bgColor: "#0f172a",
-    imagePlaceholder: "Healthcare"
+    imageSrc: "/Image (Wellness & Healthcare).png",
   },
   {
     title: "Retail & Commerce",
     description: "End-to-end commerce platforms built for evolving retail environments.",
-    bgColor: "#0f172a",
-    imagePlaceholder: "Retail"
+    imageSrc: "/Image (Gig & Freelance Ecosystems).png",
   },
   {
     title: "Professional Services",
     description: "Tools and platforms for consultancy, advisory, and service-based operations.",
-    bgColor: "#0f172a",
-    imagePlaceholder: "Services"
-  }
+    imageSrc: "/Image (Professional Services).png",
+  },
 ];
 
-function IndustryCard({ industry, index }: { industry: Industry; index: number }) {
+function IndustryCard({ industry, index, isActive, onHover }: { industry: Industry; index: number; isActive: boolean; onHover: () => void }) {
   const cardInnerRef = useRef<HTMLDivElement>(null);
-  const isFlippedRef = useRef(false);
 
-  const handleMouseEnter = () => {
-    if (isFlippedRef.current) return;
-    isFlippedRef.current = true;
-    gsap.to(cardInnerRef.current, {
-      rotateY: 180,
-      duration: 0.7,
-      ease: "power3.inOut"
-    });
-  };
-
-  const handleMouseLeave = () => {
-    if (!isFlippedRef.current) return;
-    isFlippedRef.current = false;
-    gsap.to(cardInnerRef.current, {
-      rotateY: 0,
-      duration: 0.7,
-      ease: "power3.inOut"
-    });
-  };
+  useEffect(() => {
+    if (cardInnerRef.current) {
+      gsap.to(cardInnerRef.current, {
+        rotateY: isActive ? 180 : 0,
+        duration: 0.8,
+        ease: "power3.inOut",
+        overwrite: "auto",
+      });
+    }
+  }, [isActive]);
 
   return (
     <div
-      className="relative flex-shrink-0 w-[200px] h-[200px] md:w-[220px] md:h-[220px] lg:w-[240px] lg:h-[240px] transition-all duration-300 hover:z-50"
-      style={{ perspective: "1000px", zIndex: index }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="iww-card-wrap"
+      style={{ zIndex: isActive ? 50 : index }}
+      onMouseEnter={onHover}
     >
-      {/* Card Inner — this is what flips */}
-      <div
-        ref={cardInnerRef}
-        className="relative w-full h-full rounded-full"
-        style={{ transformStyle: "preserve-3d", willChange: "transform" }}
-      >
-        {/* FRONT — Image Placeholder */}
-        <div
-          className="absolute inset-0 rounded-full overflow-hidden flex flex-col items-center justify-center shadow-xl"
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            background: index === 0
-              ? "linear-gradient(135deg, #009FE3 0%, #0077b6 100%)"
-              : "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)"
-          }}
-        >
-          {/* Decorative dashed border ring */}
-          <div className="absolute inset-3 rounded-full border-2 border-white/20 border-dashed" />
-
-          {/* Icon */}
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-12 h-12 text-white/50 mb-2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-          </svg>
-          <span className="text-white/60 text-xs font-medium tracking-wide">{industry.imagePlaceholder}</span>
+      <div ref={cardInnerRef} className="iww-card-inner">
+        {/* ── FRONT (Inactive) ── */}
+        <div className="iww-card-front overflow-hidden">
+          <Image
+            src={industry.imageSrc}
+            alt={industry.title}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 180px, (max-width: 480px) 140px, 220px"
+            className="transition-transform duration-700 hover:scale-110"
+          />
+          <div className="iww-ring-dashed z-10" />
         </div>
 
-        {/* BACK — Content */}
-        <div
-          className="absolute inset-0 rounded-full flex flex-col items-center justify-center text-center p-6 shadow-xl"
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-            background: "linear-gradient(135deg, #009FE3 0%, #0077b6 100%)"
-          }}
-        >
-          {/* Decorative ring */}
-          <div className="absolute inset-3 rounded-full border-2 border-white/20 border-dashed" />
-
-          <div className="relative z-10 px-2">
-            <h3 className="text-white font-bold text-sm md:text-base leading-tight mb-2">
-              {industry.title}
-            </h3>
-            <p className="text-blue-100 text-xs md:text-sm leading-relaxed">
-              {industry.description}
-            </p>
+        {/* ── BACK (Active) ── */}
+        <div className="iww-card-back">
+          <div className="iww-ring-dashed iww-ring-blue" />
+          <div className="iww-back-content">
+            <h3 className="iww-back-title">{industry.title}</h3>
+            <p className="iww-back-desc">{industry.description}</p>
           </div>
         </div>
       </div>
@@ -129,41 +89,182 @@ function IndustryCard({ industry, index }: { industry: Industry; index: number }
 }
 
 export default function IndustriesWeWorkWith() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(headerRefs.current, {
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+        y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out"
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-24 bg-white w-full overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <>
+      <style>{`
+        .iww-section {
+          position: relative; width: 100%;
+          padding: 100px 24px 120px;
+          background: #f5f8ff;
+          overflow: hidden;
+        }
+        /* Matching subtle background glows */
+        .iww-section::before {
+          content: ""; position: absolute; inset: 0;
+          background:
+            radial-gradient(ellipse 800px 400px at 50% 100%, rgba(0,159,227,0.06) 0%, transparent 70%),
+            radial-gradient(ellipse 400px 400px at 10% 40%, rgba(0,100,255,0.04) 0%, transparent 70%),
+            radial-gradient(ellipse 400px 400px at 90% 60%, rgba(0,159,227,0.04) 0%, transparent 70%);
+          pointer-events: none; z-index: 0;
+        }
 
-        {/* Section Heading */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0f172a] mb-6 tracking-tight">
-            Industries we work with
-          </h2>
-          <p className="text-lg md:text-xl text-gray-500 leading-relaxed">
-            MAARRS develops platforms tailored to industry-specific operations, workflows, and evolving business environments.
-          </p>
-        </div>
+        .iww-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 2; }
 
-        {/* Cards Row — overlapping layout using negative margins */}
-        <div className="flex items-center justify-center">
-          <div className="flex items-center" style={{ paddingRight: '60px' }}>
-            {industries.map((industry, index) => (
-              <div
-                key={index}
-                style={{ marginLeft: index === 0 ? 0 : '-60px', zIndex: index }}
-                className="relative hover:z-50 transition-all duration-300"
-              >
-                <IndustryCard industry={industry} index={index} />
-              </div>
-            ))}
+        /* Badge */
+        .iww-badge {
+          display: inline-flex; align-items: center; gap: 7px;
+          padding: 5px 16px; border-radius: 999px;
+          border: 1px solid rgba(0,159,227,0.22); background: rgba(255,255,255,0.8);
+          font-size: 11px; font-weight: 700; letter-spacing: .10em;
+          color: #009FE3; text-transform: uppercase; margin-bottom: 20px;
+          backdrop-filter: blur(8px);
+        }
+        .iww-badge-dot {
+          width: 7px; height: 7px; border-radius: 50%; background: #009FE3;
+          animation: iwwDot 2s ease-in-out infinite;
+        }
+        @keyframes iwwDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+        .iww-heading {
+          font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800;
+          color: #0f172a; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 14px;
+        }
+        .iww-blue { color: #009FE3; }
+        .iww-sub { font-size: 1rem; color: #64748b; line-height: 1.75; max-width: 600px; margin: 0 auto 60px; }
+
+        /* Card Container */
+        .iww-cards-container {
+          display: flex; align-items: center; justify-content: center;
+          padding-right: 60px; /* Offset for negative margins */
+        }
+
+        /* ── Card Styles ── */
+        .iww-card-wrap {
+          position: relative; flex-shrink: 0;
+          width: 220px; height: 220px;
+          perspective: 1200px; cursor: pointer;
+          transition: transform 0.4s ease;
+        }
+        @media(max-width: 768px) {
+          .iww-card-wrap { width: 180px; height: 180px; }
+          .iww-cards-container { padding-right: 40px; }
+        }
+        @media(max-width: 480px) {
+          .iww-card-wrap { width: 140px; height: 140px; }
+          .iww-cards-container { padding-right: 30px; }
+        }
+
+        .iww-card-wrap:hover { transform: translateY(-10px); z-index: 60 !important; }
+
+        .iww-card-inner {
+          position: relative; width: 100%; height: 100%;
+          border-radius: 50%; transform-style: preserve-3d;
+          will-change: transform;
+        }
+
+        .iww-card-front, .iww-card-back {
+          position: absolute; inset: 0; border-radius: 50%;
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          backface-visibility: hidden; -webkit-backface-visibility: hidden;
+          box-shadow: 0 10px 30px rgba(0, 100, 200, 0.1);
+        }
+
+        /* FRONT (Inactive) - Image */
+        .iww-card-front {
+          background: #eaf4ff;
+          border: 1px solid rgba(0,159,227,0.2);
+        }
+
+        /* BACK (Active) - Clean White/Light */
+        .iww-card-back {
+          background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+          color: #0f172a; transform: rotateY(180deg);
+          border: 1px solid rgba(0,159,227,0.25);
+          box-shadow: 0 15px 40px rgba(0, 159, 227, 0.15);
+          padding: 24px; text-align: center;
+        }
+        .iww-back-title {
+          font-size: 1.05rem; font-weight: 800; line-height: 1.2;
+          margin-bottom: 8px; letter-spacing: -0.01em; color: #009FE3;
+        }
+        .iww-back-desc {
+          font-size: 0.75rem; color: #475569; line-height: 1.5; font-weight: 500;
+        }
+
+        @media(max-width: 480px) {
+          .iww-back-title { font-size: 0.85rem; }
+          .iww-back-desc { font-size: 0.65rem; }
+        }
+
+        /* Decorative Rings */
+        .iww-ring-dashed {
+          position: absolute; inset: 12px; border-radius: 50%;
+          border: 1.5px dashed rgba(255,255,255,0.6); pointer-events: none;
+        }
+        .iww-ring-blue { border-color: rgba(0,159,227,0.3); }
+
+        /* Scatter dots */
+        .iww-dot { position: absolute; border-radius: 50%; background: #009FE3; opacity: .09; pointer-events: none; }
+      `}</style>
+
+      <section ref={sectionRef} className="iww-section">
+        {/* Scatter dots */}
+        <span className="iww-dot" style={{ width: 8, height: 8, top: "20%", left: "8%" }} />
+        <span className="iww-dot" style={{ width: 6, height: 6, top: "65%", left: "5%" }} />
+        <span className="iww-dot" style={{ width: 7, height: 7, top: "15%", right: "10%" }} />
+        <span className="iww-dot" style={{ width: 5, height: 5, top: "80%", right: "8%" }} />
+
+        <div className="iww-inner">
+          <div style={{ textAlign: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 18 }}>
+              <span ref={(el) => { headerRefs.current[0] = el; }} className="iww-badge">
+                <span className="iww-badge-dot" />
+                Domains
+              </span>
+            </div>
+            <h2 ref={(el) => { headerRefs.current[1] = el; }} className="iww-heading">
+              Industries we <span className="iww-blue">work with</span>
+            </h2>
+            <p ref={(el) => { headerRefs.current[2] = el; }} className="iww-sub">
+              MAARRS develops platforms tailored to industry-specific operations, workflows, and evolving business environments.
+            </p>
           </div>
+
+          <div className="iww-cards-container">
+            {INDUSTRIES.map((industry, index) => {
+              // Adjust negative margin for overlapping effect based on screen size
+              const marginClass = index === 0 ? "ml-0" : "-ml-[40px] md:-ml-[60px]";
+
+              return (
+                <div key={index} className={marginClass}>
+                  <IndustryCard
+                    industry={industry}
+                    index={index}
+                    isActive={activeIndex === index}
+                    onHover={() => setActiveIndex(index)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+
         </div>
-
-        {/* Hint text */}
-        <p className="text-center text-gray-400 text-sm mt-12 tracking-wide">
-          Hover over each circle to learn more
-        </p>
-
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
