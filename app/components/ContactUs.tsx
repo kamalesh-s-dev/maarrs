@@ -33,25 +33,43 @@ export default function ContactUs() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-5 mt-2">
+          <div className="flex flex-col gap-4 mt-4">
             {[
-              { label: "Email", value: "hello@maarrs.com", href: "mailto:hello@maarrs.com", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /> },
-              { label: "Phone", value: "+91 XXXXX XXXXX", href: "tel:+91XXXXXXXXXX", icon: <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /> },
-              { label: "Location", value: "India", href: undefined, icon: <><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></> },
+              { 
+                label: "Direct Contact", 
+                value: (
+                  <div className="flex flex-col gap-1.5 mt-1">
+                    <span className="text-[#0f172a] font-bold text-base">Aashik Siraj</span>
+                    <a href="mailto:hello@maarrs.com" className="text-gray-500 hover:text-[#009FE3] transition-colors font-medium">hello@maarrs.com</a>
+                    <a href="tel:+918754799981" className="text-gray-500 hover:text-[#009FE3] transition-colors font-medium">+91 87547 99981</a>
+                  </div>
+                ), 
+                icon: <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /> 
+              },
+              { 
+                label: "Office Address", 
+                value: (
+                  <span className="block text-gray-500 leading-relaxed font-medium mt-1">
+                    14/11, Balaji Garden Extn,<br />
+                    Subramaniyam Palayam, GN Mills Post,<br />
+                    Coimbatore North,<br />
+                    Tamil Nadu - 641029
+                  </span>
+                ), 
+                icon: <><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></> 
+              },
             ].map((item, i) => (
-              <div key={i} className={`reveal delay-${(i + 1) * 100} flex items-start gap-4`}>
-                <div className="w-11 h-11 flex-shrink-0 bg-[#e6f4fc] rounded-xl flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-[#009FE3]">
+              <div key={i} className={`reveal delay-${(i + 1) * 100} flex items-start gap-5 p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,159,227,0.08)] hover:border-[#009FE3]/20 transition-all duration-300 group`}>
+                <div className="w-14 h-14 flex-shrink-0 bg-gradient-to-br from-[#f0f8ff] to-[#e6f4fc] rounded-2xl flex items-center justify-center border border-[#009FE3]/10 group-hover:scale-110 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-7 h-7 text-[#009FE3]">
                     {item.icon}
                   </svg>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-1">{item.label}</p>
-                  {item.href ? (
-                    <a href={item.href} className="text-gray-700 font-medium hover:text-[#009FE3] transition-colors duration-200">{item.value}</a>
-                  ) : (
-                    <span className="text-gray-700 font-medium">{item.value}</span>
-                  )}
+                  <p className="text-xs text-[#009FE3] font-bold uppercase tracking-widest mb-1">{item.label}</p>
+                  <div className="text-sm">
+                    {item.value}
+                  </div>
                 </div>
               </div>
             ))}
@@ -72,39 +90,33 @@ export default function ContactUs() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-              <h3 className="text-xl font-bold text-[#0f172a] mb-1">Send us a message</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <h3 className="text-2xl font-bold text-[#0f172a] mb-2 tracking-tight">Send us a message</h3>
+              <div className="flex flex-col gap-5">
                 {[
-                  { id: "name", label: "Full Name", type: "text", placeholder: "John Smith" },
-                  { id: "email", label: "Email Address", type: "email", placeholder: "john@company.com" },
+                  { id: "name", label: "Full Name", type: "text", placeholder: "e.g. John Smith" },
+                  { id: "email", label: "Email Address", type: "email", placeholder: "e.g. john@company.com" },
+                  { id: "company", label: "Company / Organisation", type: "text", placeholder: "e.g. Acme Corp" }
                 ].map((field) => (
-                  <div key={field.id} className="flex flex-col gap-1.5">
-                    <label htmlFor={field.id} className="text-sm font-medium text-gray-600">{field.label}</label>
+                  <div key={field.id} className="flex flex-col gap-1.5 group">
+                    <label htmlFor={field.id} className="text-[13px] font-semibold text-gray-500 uppercase tracking-wide group-focus-within:text-[#009FE3] transition-colors duration-300">{field.label}</label>
                     <input
-                      id={field.id} name={field.id} type={field.type} required
+                      id={field.id} name={field.id} type={field.type} required={field.id !== 'company'}
                       value={formData[field.id as keyof typeof formData]}
                       onChange={handleChange} placeholder={field.placeholder}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#f8fbff] text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-[#009FE3] focus:ring-2 focus:ring-[#009FE3]/20 transition-all duration-200"
+                      className="w-full px-5 py-3.5 rounded-2xl border-2 border-transparent bg-gray-50 text-gray-900 placeholder-gray-400 text-base focus:outline-none focus:bg-white focus:border-[#009FE3] focus:shadow-[0_4px_20px_rgba(0,159,227,0.12)] transition-all duration-300"
                     />
                   </div>
                 ))}
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="company" className="text-sm font-medium text-gray-600">Company / Organisation</label>
-                <input
-                  id="company" name="company" type="text"
-                  value={formData.company} onChange={handleChange} placeholder="Your company name"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#f8fbff] text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-[#009FE3] focus:ring-2 focus:ring-[#009FE3]/20 transition-all duration-200"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="message" className="text-sm font-medium text-gray-600">Message</label>
-                <textarea
-                  id="message" name="message" required rows={5}
-                  value={formData.message} onChange={handleChange}
-                  placeholder="Tell us about your project or what you're looking to build..."
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#f8fbff] text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-[#009FE3] focus:ring-2 focus:ring-[#009FE3]/20 transition-all duration-200 resize-none"
-                />
+                
+                <div className="flex flex-col gap-1.5 group">
+                  <label htmlFor="message" className="text-[13px] font-semibold text-gray-500 uppercase tracking-wide group-focus-within:text-[#009FE3] transition-colors duration-300">Message</label>
+                  <textarea
+                    id="message" name="message" required rows={4}
+                    value={formData.message} onChange={handleChange}
+                    placeholder="Tell us about your project or what you're looking to build..."
+                    className="w-full px-5 py-3.5 rounded-2xl border-2 border-transparent bg-gray-50 text-gray-900 placeholder-gray-400 text-base focus:outline-none focus:bg-white focus:border-[#009FE3] focus:shadow-[0_4px_20px_rgba(0,159,227,0.12)] transition-all duration-300 resize-none"
+                  />
+                </div>
               </div>
               <button type="submit" className="w-full flex items-center justify-center gap-2 px-8 py-3.5 bg-[#009FE3] text-white font-semibold rounded-xl shadow-lg shadow-[#009FE3]/20 hover:bg-[#0089c4] hover:-translate-y-0.5 transition-all duration-300 text-base mt-1">
                 Send Message

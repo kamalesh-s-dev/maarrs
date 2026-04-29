@@ -130,20 +130,18 @@ export default function HeroBanner() {
       >
         {/* ── Hero background image ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden"
           style={{ zIndex: 0 }}
         >
           <Image
             src="/herobanner8.png"
             alt="Hero background orbital rings"
-            width={1920}
-            height={1080}
-            quality={100}
+            fill
+            sizes="100vw"
+            quality={75}
             priority
-            style={{
-              objectFit: "cover",
-              objectPosition: "center center",
-            }}
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center max-md:object-[75%_center] max-md:scale-[1.2]"
           />
         </div>
 
