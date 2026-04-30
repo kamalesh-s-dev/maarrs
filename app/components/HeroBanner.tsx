@@ -30,9 +30,7 @@ const CARDS = [
   {
     icon: <IconSettings />,
     accent: "#009FE3",
-    side: "left" as const,
-    top: "22%",
-    left: "15%",
+    posClasses: "max-md:top-[16%] max-md:left-[4%] md:top-[22%] md:left-[15%]",
     anim: "ag1",
     dur: "6.8s",
     delay: "0s",
@@ -40,9 +38,7 @@ const CARDS = [
   {
     icon: <IconBolt />,
     accent: "#7c3aed",
-    side: "left" as const,
-    top: "65%",
-    left: "20%",
+    posClasses: "max-md:top-[56%] max-md:left-[2%] md:top-[65%] md:left-[20%]",
     anim: "ag2",
     dur: "5.6s",
     delay: "1.4s",
@@ -50,9 +46,7 @@ const CARDS = [
   {
     icon: <IconChart />,
     accent: "#009FE3",
-    side: "right" as const,
-    top: "18%",
-    right: "22%",
+    posClasses: "max-md:top-[22%] max-md:right-[4%] md:top-[18%] md:right-[22%]",
     anim: "ag3",
     dur: "7.4s",
     delay: "0.7s",
@@ -60,9 +54,7 @@ const CARDS = [
   {
     icon: <IconGlobe />,
     accent: "#0891b2",
-    side: "right" as const,
-    top: "70%",
-    right: "16%",
+    posClasses: "max-md:!hidden max-md:top-[62%] max-md:right-[2%] md:top-[70%] md:right-[16%]",
     anim: "ag4",
     dur: "8.2s",
     delay: "2.1s",
@@ -75,10 +67,10 @@ export default function HeroBanner() {
   return (
     <>
       <style>{`
-        @keyframes ag1{0%,100%{transform:translate(0,0)}35%{transform:translate(18px,-24px)}70%{transform:translate(-12px,14px)}}
-        @keyframes ag2{0%,100%{transform:translate(0,0)}38%{transform:translate(-24px,-18px)}72%{transform:translate(18px,12px)}}
-        @keyframes ag3{0%,100%{transform:translate(0,0)}42%{transform:translate(22px,24px)}78%{transform:translate(-14px,-18px)}}
-        @keyframes ag4{0%,100%{transform:translate(0,0)}46%{transform:translate(-18px,26px)}78%{transform:translate(24px,-14px)}}
+        @keyframes ag1{0%,100%{transform:translate(0,0)}35%{transform:translate(12px,-16px)}70%{transform:translate(-8px,10px)}}
+        @keyframes ag2{0%,100%{transform:translate(0,0)}38%{transform:translate(-16px,-12px)}72%{transform:translate(12px,8px)}}
+        @keyframes ag3{0%,100%{transform:translate(0,0)}42%{transform:translate(16px,16px)}78%{transform:translate(-10px,-12px)}}
+        @keyframes ag4{0%,100%{transform:translate(0,0)}46%{transform:translate(-12px,18px)}78%{transform:translate(16px,-10px)}}
 
         /* ── Floating icon shell ── */
         .hb-card {
@@ -86,8 +78,8 @@ export default function HeroBanner() {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 76px;
-          height: 76px;
+          width: 56px;
+          height: 56px;
           border-radius: 50%;
           background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.4));
           backdrop-filter: blur(16px);
@@ -99,20 +91,38 @@ export default function HeroBanner() {
           transition: all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           cursor: pointer;
         }
+        @media (min-width: 768px) {
+          .hb-card {
+            width: 76px;
+            height: 76px;
+          }
+        }
         .hb-inner-circle {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 52px;
-          height: 52px;
+          width: 38px;
+          height: 38px;
           border-radius: 50%;
           box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);
           transition: transform .4s ease;
         }
+        @media (min-width: 768px) {
+          .hb-inner-circle {
+            width: 52px;
+            height: 52px;
+          }
+        }
         .hb-inner-circle svg {
-          width: 26px;
-          height: 26px;
+          width: 20px;
+          height: 20px;
           filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        @media (min-width: 768px) {
+          .hb-inner-circle svg {
+            width: 26px;
+            height: 26px;
+          }
         }
         .hb-card:hover {
           box-shadow: 0 16px 48px rgba(0,159,227,0.3), inset 0 2px 4px rgba(255,255,255,1);
@@ -125,7 +135,7 @@ export default function HeroBanner() {
 
       <section
         ref={ref as React.RefObject<HTMLElement>}
-        className="relative w-full min-h-[100vh] flex flex-col items-center justify-center pt-24 overflow-hidden"
+        className="relative w-full min-h-[100vh] flex flex-col items-center justify-center pt-20 md:pt-24 overflow-hidden"
         style={{ background: "#f0f6ff" }}
       >
         {/* ── Hero background image ── */}
@@ -133,6 +143,7 @@ export default function HeroBanner() {
           className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden"
           style={{ zIndex: 0 }}
         >
+          {/* Desktop background */}
           <Image
             src="/herobanner8.png"
             alt="Hero background orbital rings"
@@ -141,7 +152,18 @@ export default function HeroBanner() {
             quality={75}
             priority
             fetchPriority="high"
-            className="w-full h-full object-cover object-center max-md:object-[75%_center] max-md:scale-[1.2]"
+            className="hidden md:block w-full h-full object-cover object-center"
+          />
+          {/* Mobile background */}
+          <Image
+            src="/mobilebg.png"
+            alt="Hero mobile background orbital rings"
+            fill
+            sizes="100vw"
+            quality={75}
+            priority
+            fetchPriority="high"
+            className="block md:hidden w-full h-full object-cover object-center"
           />
         </div>
 
@@ -159,12 +181,8 @@ export default function HeroBanner() {
         {CARDS.map((card, i) => (
           <div
             key={i}
-            className="hb-card hidden md:flex"
+            className={`hb-card flex ${card.posClasses}`}
             style={{
-              top: card.top,
-              ...(card.side === "left"
-                ? { left: card.left }
-                : { right: card.right }),
               animation: `${card.anim} ${card.dur} ease-in-out infinite alternate`,
               animationDelay: card.delay,
               color: card.accent,
@@ -181,11 +199,12 @@ export default function HeroBanner() {
 
         {/* ══ MAIN CONTENT ══════════════════════════════════════════ */}
         <div
-          className="relative flex flex-col items-center text-center max-w-4xl px-6 mx-auto mt-10"
+          className="relative flex flex-col items-center text-center max-w-4xl px-4 md:px-6 mx-auto mt-6 md:mt-10"
           style={{ zIndex: 10 }}
         >
-          <h1 className="reveal text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold text-[#0b1120] leading-[1.08] tracking-tighter mb-8 drop-shadow-sm">
-            Custom Technology{" "}
+          <h1 className="reveal text-[2.75rem] leading-[1.1] md:text-6xl lg:text-[4.5rem] font-extrabold text-[#0b1120] md:leading-[1.08] tracking-tight md:tracking-tighter mb-6 md:mb-8 drop-shadow-sm">
+            Custom <br className="md:hidden" />
+            Technology <br className="md:hidden" />
             <span
               style={{
                 background: "linear-gradient(135deg, #009FE3 0%, #0ea5e9 50%, #0284c7 100%)",
@@ -197,21 +216,21 @@ export default function HeroBanner() {
               Platforms
             </span>
             ,{" "}
-            <br className="hidden md:block" />
+            <br />
             built with intent.
           </h1>
 
-          <p className="reveal delay-100 text-md md:text-[1.25rem] text-[#334155] max-w-2xl leading-[1.7] font-medium tracking-tight mb-12">
+          <p className="reveal delay-100 text-[0.95rem] md:text-[1.25rem] text-[#475569] max-w-[310px] md:max-w-2xl leading-[1.6] md:leading-[1.7] font-medium tracking-tight mb-10 md:mb-12 mx-auto">
             We build custom digital platforms that empower organisations to operate efficiently, scale securely, and evolve continuously.
           </p>
 
-          <div className="reveal delay-200 flex flex-col sm:flex-row items-center gap-5">
+          <div className="reveal delay-200 flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto px-4 md:px-0">
             <Link
               href="#contact"
-              className="group flex items-center justify-center gap-2 px-9 py-4 bg-[#009FE3] text-white font-semibold rounded-full shadow-[0_8px_24px_rgba(0,159,227,0.35)] hover:bg-[#008ce3] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,159,227,0.45)] transition-all duration-300 w-full sm:w-auto text-[1.05rem]"
+              className="group flex items-center justify-center gap-2 px-8 py-3.5 md:px-9 md:py-4 bg-[#009FE3] text-white font-semibold rounded-full shadow-[0_8px_24px_rgba(0,159,227,0.35)] hover:bg-[#008ce3] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,159,227,0.45)] transition-all duration-300 w-full md:w-auto text-[0.95rem] md:text-[1.05rem]"
             >
               Start a Conversation
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-[18px] h-[18px] md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
               </svg>
             </Link>

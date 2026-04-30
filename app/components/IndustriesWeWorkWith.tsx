@@ -160,12 +160,16 @@ export default function IndustriesWeWorkWith() {
           transition: transform 0.4s ease;
         }
         @media(max-width: 768px) {
-          .iww-card-wrap { width: 180px; height: 180px; }
-          .iww-cards-container { padding-right: 40px; }
+          .iww-card-wrap { width: 170px; height: 170px; }
+          .iww-cards-container { 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            padding-right: 0; 
+          }
         }
         @media(max-width: 480px) {
-          .iww-card-wrap { width: 140px; height: 140px; }
-          .iww-cards-container { padding-right: 30px; }
+          .iww-card-wrap { width: 155px; height: 155px; }
+          .iww-cards-container { gap: 16px; }
         }
 
         .iww-card-wrap:hover { transform: translateY(-10px); z-index: 60 !important; }
@@ -205,9 +209,10 @@ export default function IndustriesWeWorkWith() {
           font-size: 0.75rem; color: #475569; line-height: 1.5; font-weight: 500;
         }
 
-        @media(max-width: 480px) {
-          .iww-back-title { font-size: 0.85rem; }
-          .iww-back-desc { font-size: 0.65rem; }
+        @media(max-width: 768px) {
+          .iww-card-back { padding: 12px; }
+          .iww-back-title { font-size: 0.9rem; margin-bottom: 4px; }
+          .iww-back-desc { font-size: 0.7rem; line-height: 1.35; }
         }
 
         /* Decorative Rings */
@@ -246,8 +251,8 @@ export default function IndustriesWeWorkWith() {
 
           <div className="iww-cards-container">
             {INDUSTRIES.map((industry, index) => {
-              // Adjust negative margin for overlapping effect based on screen size
-              const marginClass = index === 0 ? "ml-0" : "-ml-[40px] md:-ml-[60px]";
+              // Remove negative margin for overlapping effect on mobile to allow clean wrapping
+              const marginClass = index === 0 ? "ml-0" : "max-md:ml-0 -ml-[40px] md:-ml-[60px]";
 
               return (
                 <div key={index} className={marginClass}>
