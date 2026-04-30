@@ -33,7 +33,6 @@ export default function Home() {
       <GutterDecorated 
         arcSide="left" 
         glowLeak="right" 
-        scanLine 
         crossMarks 
         verticalLabel="OPERATIONAL IMPACT" 
         sectionBadge="SEC.02"
@@ -72,7 +71,6 @@ export default function Home() {
         verticalLabel="SUPPORT & SCALING" 
         cornerMarks
         ghostNumber="05"
-        scanLine
         tickMarks
       >
         <SupportingCapabilities />

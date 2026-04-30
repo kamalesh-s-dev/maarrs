@@ -293,6 +293,9 @@ export default function HowPlatformsServe() {
         }
         /* Right panel top padding to align with dark card visually */
         .hps-right-pad { padding-top: 148px; }
+        @media (max-width: 768px) {
+          .hps-right-pad { padding-top: 60px; }
+        }
         .hps-bg-dot {
           position: absolute; border-radius: 50%;
           background: #009FE3; opacity: .10; pointer-events: none;

@@ -82,7 +82,7 @@ export default function Careers() {
   ];
 
   return (
-    <section ref={sectionRef} className="w-full py-20 bg-white relative overflow-hidden" id="careers">
+    <section ref={sectionRef} className="w-full py-20 bg-[#f8fbff] relative overflow-hidden" id="careers">
       {/* Background decorations */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Fine Crosshatch Grid */}
