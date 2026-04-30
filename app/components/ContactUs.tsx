@@ -18,8 +18,18 @@ export default function ContactUs() {
   };
 
   return (
-    <section id="contact" ref={ref as React.RefObject<HTMLElement>} className="py-24 bg-[#f8fbff] w-full">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <section id="contact" ref={ref as React.RefObject<HTMLElement>} className="relative py-20 bg-[#f8fbff] w-full overflow-hidden">
+      {/* Subtle Background Visuals */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#009FE3 1.5px, transparent 1.5px)', backgroundSize: '40px 40px' }} />
+        
+        {/* Faint glows */}
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-bl from-[#e6f4fc] to-transparent rounded-full blur-[100px] opacity-70" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-tr from-[#009FE3]/5 to-transparent rounded-full blur-[120px] opacity-80" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start relative z-10">
 
         {/* Left */}
         <div className="flex flex-col gap-8">

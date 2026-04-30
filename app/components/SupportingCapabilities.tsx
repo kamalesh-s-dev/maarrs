@@ -80,7 +80,7 @@ export default function SupportingCapabilities() {
       <style>{`
         .sc-section {
           position: relative; width: 100%;
-          padding: 100px 24px 120px;
+          padding: 80px 24px;
           background: #f5f8ff;
           overflow: hidden;
         }

@@ -119,7 +119,7 @@ export default function HowWeBuild() {
         /* ── Section ── */
         .hwb-section {
           position: relative; width: 100%;
-          padding: 60px 24px 110px;
+          padding: 80px 24px;
           background: #f5f8ff;
           overflow: hidden;
         }

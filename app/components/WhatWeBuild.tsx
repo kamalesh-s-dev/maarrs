@@ -198,7 +198,7 @@ export default function WhatWeBuild() {
         .wwb-section {
           position: relative;
           width: 100%;
-          padding: 110px 24px 120px;
+          padding: 80px 24px;
           background: #f5f8ff;
           overflow: hidden;
         }

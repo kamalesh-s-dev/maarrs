@@ -37,11 +37,26 @@ export default function Founders() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-24 md:py-32 bg-[#f8fbff] relative overflow-hidden" id="founders">
+    <section ref={sectionRef} className="w-full py-20 bg-[#f8fbff] relative overflow-hidden" id="founders">
       {/* Background aesthetics */}
-      <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-white to-transparent pointer-events-none" />
-      <div className="absolute top-20 left-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-[#e6f4fc] to-transparent rounded-full blur-3xl opacity-60 pointer-events-none" />
-      <div className="absolute bottom-10 right-[-10%] w-[600px] h-[600px] bg-gradient-to-tl from-[#f0f8ff] to-transparent rounded-full blur-3xl opacity-60 pointer-events-none" />
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Radial Dot Grid */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#009FE3 1.5px, transparent 1.5px)', backgroundSize: '36px 36px' }} />
+        
+        {/* Floating Orbs / Glows */}
+        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-gradient-to-tr from-[#009FE3]/10 to-transparent rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-gradient-to-tl from-[#0891b2]/10 to-transparent rounded-full blur-[100px]" />
+        
+        {/* Diagonal Slash Pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="diagonal-slash-founders" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M-10,10 l20,-20 M0,40 l40,-40 M30,50 l20,-20" stroke="#009FE3" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#diagonal-slash-founders)" />
+        </svg>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         

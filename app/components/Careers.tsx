@@ -82,10 +82,21 @@ export default function Careers() {
   ];
 
   return (
-    <section ref={sectionRef} className="w-full py-24 md:py-32 bg-white relative overflow-hidden" id="careers">
+    <section ref={sectionRef} className="w-full py-20 bg-white relative overflow-hidden" id="careers">
       {/* Background decorations */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-[#e6f4fc] to-transparent rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-[#f0f8ff] to-transparent rounded-full blur-3xl opacity-60 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Fine Crosshatch Grid */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #009FE3 1px, transparent 1px), linear-gradient(to bottom, #009FE3 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
+        
+        {/* Color Wash Gradients */}
+        <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-gradient-to-b from-[#009FE3]/5 to-transparent rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[80vw] h-[80vw] bg-gradient-to-t from-[#7c3aed]/5 to-transparent rounded-full blur-[150px] translate-y-1/3 -translate-x-1/4" />
+        
+        {/* Concentric Ellipses */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] border-[1px] border-[#009FE3]/5 rounded-[100%]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] border-[1px] border-[#009FE3]/5 rounded-[100%]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] border-[1px] border-[#009FE3]/5 rounded-[100%]" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}

@@ -151,7 +151,7 @@ export default function HowPlatformsServe() {
       <style>{`
         .hps-section {
           position: relative; width: 100%;
-          padding: 110px 24px 40px;
+          padding: 40px 24px 80px;
           background: #f5f8ff; overflow: hidden;
         }
         .hps-section::before {
