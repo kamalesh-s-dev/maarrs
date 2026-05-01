@@ -172,7 +172,7 @@ export default function HeroBanner() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to bottom,rgba(240,246,255,.45) 0%,transparent 12%,transparent 88%,rgba(240,246,255,.55) 100%)",
+              "linear-gradient(to bottom, rgba(250,252,255,0.8) 0%, transparent 12%, transparent 85%, rgba(250,252,255,1) 100%)",
             zIndex: 1,
           }}
         />

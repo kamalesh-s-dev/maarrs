@@ -14,7 +14,6 @@ interface GutterDecoratedProps {
   glowLeak?: 'left' | 'right' | 'both' | 'none';
   concentricRings?: 'left' | 'right' | 'both' | 'none';
   scanLine?: boolean;
-  tickMarks?: boolean;
   className?: string;
 }
 
@@ -32,7 +31,6 @@ export default function GutterDecorated({
   glowLeak = 'none',
   concentricRings = 'none',
   scanLine = false,
-  tickMarks = false,
   className = '',
 }: GutterDecoratedProps) {
   return (
@@ -43,7 +41,7 @@ export default function GutterDecorated({
       </div>
 
       {/* Decorative Overlay - Sits under the pointer-events-none layer but behind main text */}
-      <div className="absolute inset-0 pointer-events-none z-[5] overflow-hidden mix-blend-multiply">
+      <div className="absolute inset-0 pointer-events-none z-[5] mix-blend-multiply">
         {/* Glow / Light Leak */}
         {(glowLeak === 'left' || glowLeak === 'both') && (
           <div className="absolute top-[20%] left-[-15%] w-[50vw] h-[50vw] bg-[#009FE3] rounded-full mix-blend-normal filter blur-[100px] opacity-[0.04] animate-pulse-slow" />
@@ -67,7 +65,7 @@ export default function GutterDecorated({
         )}
       </div>
 
-      <div className="absolute inset-0 pointer-events-none z-[50] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-[50]">
         
         {/* Scan Line */}
         {scanLine && (
@@ -82,14 +80,7 @@ export default function GutterDecorated({
           </>
         )}
         
-        {/* Tick Marks (Ruler style) */}
-        {tickMarks && (
-          <div className="absolute top-[10%] bottom-[10%] left-[3%] flex flex-col justify-between hidden md:flex opacity-20">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <div key={i} className="w-[8px] h-[1px] bg-[#009FE3]" />
-            ))}
-          </div>
-        )}
+
 
         {/* Side Arcs */}
         {arcSide === 'left' || arcSide === 'both' ? (

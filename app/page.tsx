@@ -16,7 +16,6 @@ export default function Home() {
       <HeroBanner />
       
       <GutterDecorated 
-        ghostNumber="01" 
         glowLeak="left" 
         concentricRings="right" 
         dotCluster="left" 
@@ -25,7 +24,7 @@ export default function Home() {
         gridEdges 
         cornerMarks 
         crossMarks
-        tickMarks
+
       >
         <WhatWeBuild />
       </GutterDecorated>
@@ -48,7 +47,7 @@ export default function Home() {
         gridEdges 
         cornerMarks
         ghostNumber="03"
-        tickMarks
+
       >
         <HowWeBuild />
       </GutterDecorated>
@@ -71,7 +70,7 @@ export default function Home() {
         verticalLabel="SUPPORT & SCALING" 
         cornerMarks
         ghostNumber="05"
-        tickMarks
+
       >
         <SupportingCapabilities />
       </GutterDecorated>
@@ -96,7 +95,7 @@ export default function Home() {
         verticalLabel="JOIN US" 
         cornerMarks
         ghostNumber="07"
-        tickMarks
+
       >
         <Careers />
       </GutterDecorated>
