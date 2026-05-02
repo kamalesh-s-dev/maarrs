@@ -37,15 +37,15 @@ export default function Founders() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-20 bg-[#f8fbff] relative overflow-hidden" id="founders">
+    <section ref={sectionRef} className="w-full section-wrap bg-[#f8fbff] relative overflow-hidden" id="founders">
       {/* Background aesthetics */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Radial Dot Grid */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#009FE3 1.5px, transparent 1.5px)', backgroundSize: '36px 36px' }} />
         
         {/* Floating Orbs / Glows */}
-        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-gradient-to-tr from-[#009FE3]/10 to-transparent rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-gradient-to-tl from-[#0891b2]/10 to-transparent rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-0 w-[60vw] h-[60vw] bg-gradient-to-tr from-[#009FE3]/10 to-transparent rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-0 w-[50vw] h-[50vw] bg-gradient-to-tl from-[#0891b2]/10 to-transparent rounded-full blur-[100px]" />
         
         {/* Diagonal Slash Pattern */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@ export default function Founders() {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="section-inner">
         
         {/* Header Section */}
         <div className="fnd-header text-center max-w-4xl mx-auto mb-20 md:mb-28">

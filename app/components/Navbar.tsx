@@ -7,8 +7,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
-      <nav className="flex items-center justify-between w-full max-w-6xl px-5 py-3 backdrop-blur-xl border border-white/30 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] transition-all duration-300">
+    <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-[clamp(24px,3vw,80px)] w-full">
+      <nav className="flex items-center justify-between w-full max-w-[1240px] px-5 py-3 backdrop-blur-xl border border-white/30 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] transition-all duration-300">
         {/* Logo */}
         <Link href="/" className="flex items-center transition-transform hover:scale-105 duration-300">
           <img

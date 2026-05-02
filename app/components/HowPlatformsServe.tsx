@@ -151,7 +151,6 @@ export default function HowPlatformsServe() {
       <style>{`
         .hps-section {
           position: relative; width: 100%;
-          padding: 40px 24px 80px;
           background: #f5f8ff; overflow: hidden;
         }
         .hps-section::before {
@@ -163,11 +162,9 @@ export default function HowPlatformsServe() {
         }
         /* Two-column grid. Left is sticky. */
         .hps-inner {
-          max-width: 1140px; margin: 0 auto;
           display: grid;
           grid-template-columns: 1fr 1.18fr;
           gap: 64px; align-items: start;
-          position: relative; z-index: 2;
         }
         @media (max-width: 960px) {
           .hps-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -292,7 +289,7 @@ export default function HowPlatformsServe() {
           flex-shrink: 0; will-change: transform, box-shadow;
         }
         /* Right panel top padding to align with dark card visually */
-        .hps-right-pad { padding-top: 148px; }
+        .hps-right-pad { padding-top: 0px; }
         @media (max-width: 768px) {
           .hps-right-pad { padding-top: 60px; }
         }
@@ -302,14 +299,14 @@ export default function HowPlatformsServe() {
         }
       `}</style>
 
-      <section ref={sectionRef} className="hps-section">
+      <section ref={sectionRef} className="hps-section section-wrap">
         <span className="hps-bg-dot" style={{ width: 6, height: 6, top: "14%", left: "5%" }} />
         <span className="hps-bg-dot" style={{ width: 5, height: 5, top: "44%", left: "3%" }} />
         <span className="hps-bg-dot" style={{ width: 7, height: 7, top: "74%", left: "7%" }} />
         <span className="hps-bg-dot" style={{ width: 5, height: 5, top: "28%", right: "4%" }} />
         <span className="hps-bg-dot" style={{ width: 6, height: 6, top: "86%", right: "6%" }} />
 
-        <div className="hps-inner">
+        <div className="section-inner hps-inner">
 
           {/* ── LEFT (sticky) ───────────────────────────────── */}
           <div ref={stickyRef} className="hps-sticky">

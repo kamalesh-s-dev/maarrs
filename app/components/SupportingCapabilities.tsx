@@ -80,7 +80,6 @@ export default function SupportingCapabilities() {
       <style>{`
         .sc-section {
           position: relative; width: 100%;
-          padding: 80px 24px;
           background: #f5f8ff;
           overflow: hidden;
         }
@@ -93,7 +92,7 @@ export default function SupportingCapabilities() {
           pointer-events: none; z-index: 0;
         }
 
-        .sc-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 2; }
+        .sc-inner { position: relative; z-index: 2; }
 
         /* Badge */
         .sc-badge {
@@ -110,7 +109,7 @@ export default function SupportingCapabilities() {
           color: #0f172a; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 18px;
         }
         .sc-blue { color: #009FE3; }
-        .sc-sub { font-size: 1rem; color: #64748b; line-height: 1.75; max-width: 600px; margin: 0 auto 60px; }
+        .sc-sub { font-size: 1rem; color: #64748b; line-height: 1.75; max-width: 640px; margin: 0 auto 60px; }
 
         /* ── Cards Grid ── */
         .sc-grid {
@@ -244,13 +243,13 @@ export default function SupportingCapabilities() {
         .sc-dot { position: absolute; border-radius: 50%; background: #009FE3; opacity: .09; pointer-events: none; }
       `}</style>
 
-      <section ref={ref as React.RefObject<HTMLElement>} className="sc-section">
+      <section ref={ref as React.RefObject<HTMLElement>} className="sc-section section-wrap">
         <span className="sc-dot" style={{ width: 8, height: 8, top: "15%", left: "8%" }} />
         <span className="sc-dot" style={{ width: 6, height: 6, top: "60%", left: "4%" }} />
         <span className="sc-dot" style={{ width: 7, height: 7, top: "25%", right: "10%" }} />
         <span className="sc-dot" style={{ width: 5, height: 5, top: "85%", right: "6%" }} />
 
-        <div className="sc-inner">
+        <div className="section-inner sc-inner">
           <div style={{ textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <span className="sc-badge reveal">
@@ -275,14 +274,14 @@ export default function SupportingCapabilities() {
                   <div className="sc-card-icon">{cap.icon}</div>
                   <div className="sc-card-num">{cap.num}</div>
                 </div>
-                
+
                 <h3 className="sc-card-title">{cap.title}</h3>
-                
+
                 {/* Small Separator Line */}
                 <div className="w-12 h-[2px] bg-gradient-to-r from-[#009FE3] to-transparent rounded-full mb-4 opacity-50" />
 
                 <p className="sc-card-desc">{cap.description}</p>
-                
+
                 <div className="sc-card-body">
                   <div className="sc-card-list-wrapper">
                     <ul className="sc-card-points">

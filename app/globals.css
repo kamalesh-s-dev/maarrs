@@ -23,12 +23,14 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
   font-family: "Mona Sans", system-ui, -apple-system, sans-serif;
   color: var(--text-primary);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ─── Typography ─────────────────────────────────────────────── */
@@ -128,6 +130,32 @@ p {
 
 .card-shine:hover::after {
   transform: translateX(100%);
+}
+
+/* ─── Section layout system ──────────────────────────────────── */
+/*
+ * .section-wrap  → applied to every <section> / <footer> element.
+ *                  Controls ONLY vertical rhythm (top & bottom padding).
+ * .section-inner → applied to the centring <div> inside each section.
+ *                  Controls max-width, auto side-margins, AND the
+ *                  uniform left/right gutter (padding-inline).
+ *
+ * To change horizontal spacing site-wide → edit padding-inline here.
+ * To change vertical spacing site-wide   → edit padding-top/bottom in
+ *                                          .section-wrap.
+ */
+.section-wrap {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.section-inner {
+  max-width: 1240px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 3vw, 80px);
+  position: relative;
+  z-index: 2;
 }
 
 /* ─── Selection colour ───────────────────────────────────────── */

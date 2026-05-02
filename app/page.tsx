@@ -14,98 +14,84 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-start flex-1 w-full bg-[#fafcff]">
       <HeroBanner />
-      
-      <GutterDecorated 
-        glowLeak="left" 
-        concentricRings="right" 
-        dotCluster="left" 
-        verticalLabel="PLATFORM ENGINEERING" 
-        sectionBadge="SEC.01" 
-        gridEdges 
-        cornerMarks 
-        crossMarks
 
+      {/* SEC 01 — What We Build */}
+      <GutterDecorated
+        glowLeak="left"
+        concentricRings="right"
+        dotCluster="left"
+        gridEdges
       >
         <WhatWeBuild />
       </GutterDecorated>
-      
-      <GutterDecorated 
-        arcSide="left" 
-        glowLeak="right" 
-        crossMarks 
-        verticalLabel="OPERATIONAL IMPACT" 
-        sectionBadge="SEC.02"
-        watermarkText="IMPACT"
+
+      {/* SEC 02 — How Our Platforms Serve */}
+      <GutterDecorated
+        arcSide="left"
+        glowLeak="right"
+        dotCluster="right"
+        gridEdges
       >
         <HowPlatformsServe />
       </GutterDecorated>
-      
-      <GutterDecorated 
-        dotCluster="right" 
-        concentricRings="left" 
-        verticalLabel="DEVELOPMENT LIFECYCLE" 
-        gridEdges 
-        cornerMarks
-        ghostNumber="03"
 
+      {/* SEC 03 — How We Build */}
+      <GutterDecorated
+        dotCluster="right"
+        concentricRings="left"
+        glowLeak="left"
+        gridEdges
       >
         <HowWeBuild />
       </GutterDecorated>
-      
-      <GutterDecorated 
-        arcSide="both" 
-        glowLeak="both" 
-        crossMarks 
-        verticalLabel="INDUSTRY SOLUTIONS" 
-        sectionBadge="SEC.04"
-        watermarkText="DOMAINS"
+
+      {/* SEC 04 — Industries We Work With */}
+      <GutterDecorated
+        arcSide="both"
+        glowLeak="both"
+        concentricRings="right"
+        gridEdges
       >
         <IndustriesWeWorkWith />
       </GutterDecorated>
-      
-      <GutterDecorated 
-        dotCluster="left" 
-        concentricRings="right" 
-        gridEdges 
-        verticalLabel="SUPPORT & SCALING" 
-        cornerMarks
-        ghostNumber="05"
 
+      {/* SEC 05 — Supporting Capabilities */}
+      <GutterDecorated
+        dotCluster="left"
+        concentricRings="right"
+        glowLeak="right"
+        gridEdges
       >
         <SupportingCapabilities />
       </GutterDecorated>
-      
-      <CTABanner />
-      
-      <GutterDecorated 
-        arcSide="right" 
-        glowLeak="left" 
-        crossMarks 
-        verticalLabel="LEADERSHIP" 
-        sectionBadge="SEC.06"
-        watermarkText="VISION"
+
+      {/* SEC 06 — Founders */}
+      <GutterDecorated
+        arcSide="right"
+        glowLeak="left"
+        dotCluster="left"
       >
         <Founders />
       </GutterDecorated>
-      
-      <GutterDecorated 
-        dotCluster="both" 
-        concentricRings="both" 
-        gridEdges 
-        verticalLabel="JOIN US" 
-        cornerMarks
-        ghostNumber="07"
 
+      <CTABanner />
+
+      {/* SEC 07 — Careers */}
+      <GutterDecorated
+        dotCluster="both"
+        concentricRings="both"
+        glowLeak="right"
+        gridEdges
       >
         <Careers />
       </GutterDecorated>
-      
-      <GutterDecorated 
-        arcSide="left" 
-        glowLeak="right" 
-        verticalLabel="CONNECT" 
-        sectionBadge="SEC.08"
-        watermarkText="MAARRS"
+
+      {/* SEC 08 — Contact Us */}
+      <GutterDecorated
+        arcSide="left"
+        glowLeak="right"
+        dotCluster="right"
+        concentricRings="left"
       >
         <ContactUs />
       </GutterDecorated>

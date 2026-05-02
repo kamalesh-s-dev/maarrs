@@ -20,9 +20,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className=" antialiased"
     >
-      <body className="min-h-full flex flex-col relative bg-white text-gray-900">
+      <body className="flex flex-col relative bg-white text-gray-900">
         <Navbar />
         {children}
         <Footer />

@@ -11,7 +11,6 @@ export default function Footer() {
           background: #f5f8ff;
           border-top: 1px solid rgba(0,159,227,0.15);
           overflow: hidden;
-          padding: 80px 24px 0;
         }
         
         /* Soft radial glow backgrounds */
@@ -28,7 +27,6 @@ export default function Footer() {
 
         .ftr-inner {
           position: relative; z-index: 2;
-          max-width: 1140px; margin: 0 auto;
         }
 
         /* ── Social Icons ── */
@@ -76,12 +74,12 @@ export default function Footer() {
         .ftr-bottom-link:hover { color: #009FE3; }
       `}</style>
 
-      <footer className="footer-sec">
+      <footer className="footer-sec section-wrap" style={{ paddingBottom: 0 }}>
         <span className="ftr-dot" style={{ width: 8, height: 8, top: "20%", left: "8%" }} />
         <span className="ftr-dot" style={{ width: 5, height: 5, top: "70%", left: "45%" }} />
         <span className="ftr-dot" style={{ width: 6, height: 6, top: "30%", right: "12%" }} />
 
-        <div className="ftr-inner">
+        <div className="ftr-inner section-inner">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
             
             {/* Column 1 — Brand & Intro */}

@@ -7,29 +7,48 @@ export default function ContactUs() {
   const ref = useScrollReveal();
   const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-  };
+    setLoading(true);
 
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
-    <section id="contact" ref={ref as React.RefObject<HTMLElement>} className="relative py-20 bg-[#f8fbff] w-full overflow-hidden">
+    <section id="contact" ref={ref as React.RefObject<HTMLElement>} className="relative section-wrap bg-[#f8fbff] w-full overflow-hidden">
       {/* Subtle Background Visuals */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Subtle dot pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#009FE3 1.5px, transparent 1.5px)', backgroundSize: '40px 40px' }} />
-        
+
         {/* Faint glows */}
-        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-bl from-[#e6f4fc] to-transparent rounded-full blur-[100px] opacity-70" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-tr from-[#009FE3]/5 to-transparent rounded-full blur-[120px] opacity-80" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#e6f4fc] to-transparent rounded-full blur-[100px] opacity-70" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-[#009FE3]/5 to-transparent rounded-full blur-[120px] opacity-80" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start relative z-10">
+      <div className="section-inner grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
         {/* Left */}
         <div className="flex flex-col gap-8">
@@ -45,19 +64,19 @@ export default function ContactUs() {
 
           <div className="flex flex-col gap-4 mt-4">
             {[
-              { 
-                label: "Direct Contact", 
+              {
+                label: "Direct Contact",
                 value: (
                   <div className="flex flex-col gap-1.5 mt-1">
                     <span className="text-[#0f172a] font-bold text-base">Aashik Siraj</span>
                     <a href="mailto:hello@maarrs.com" className="text-gray-500 hover:text-[#009FE3] transition-colors font-medium">hello@maarrs.com</a>
                     <a href="tel:+918754799981" className="text-gray-500 hover:text-[#009FE3] transition-colors font-medium">+91 87547 99981</a>
                   </div>
-                ), 
-                icon: <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /> 
+                ),
+                icon: <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
               },
-              { 
-                label: "Office Address", 
+              {
+                label: "Office Address",
                 value: (
                   <span className="block text-gray-500 leading-relaxed font-medium mt-1">
                     14/11, Balaji Garden Extn,<br />
@@ -65,8 +84,8 @@ export default function ContactUs() {
                     Coimbatore North,<br />
                     Tamil Nadu - 641029
                   </span>
-                ), 
-                icon: <><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></> 
+                ),
+                icon: <><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></>
               },
             ].map((item, i) => (
               <div key={i} className={`reveal delay-${(i + 1) * 100} flex items-start gap-5 p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_32px_rgba(0,159,227,0.08)] hover:border-[#009FE3]/20 transition-all duration-300 group`}>
@@ -117,7 +136,7 @@ export default function ContactUs() {
                     />
                   </div>
                 ))}
-                
+
                 <div className="flex flex-col gap-1.5 group">
                   <label htmlFor="message" className="text-[13px] font-semibold text-gray-500 uppercase tracking-wide group-focus-within:text-[#009FE3] transition-colors duration-300">Message</label>
                   <textarea
@@ -128,11 +147,49 @@ export default function ContactUs() {
                   />
                 </div>
               </div>
-              <button type="submit" className="w-full flex items-center justify-center gap-2 px-8 py-3.5 bg-[#009FE3] text-white font-semibold rounded-xl shadow-lg shadow-[#009FE3]/20 hover:bg-[#0089c4] hover:-translate-y-0.5 transition-all duration-300 text-base mt-1">
-                Send Message
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 text-base mt-1
+    ${loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-[#009FE3] text-white hover:bg-[#0089c4] hover:-translate-y-0.5 shadow-lg shadow-[#009FE3]/20"
+                  }`}
+              >
+                {loading ? (
+                  <>
+                    {/* Spinner */}
+                    <svg
+                      className="animate-spin h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      />
+                    </svg>
+
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                  </>
+                )}
               </button>
             </form>
           )}

@@ -22,22 +22,22 @@ const INDUSTRIES: Industry[] = [
   {
     title: "Education & Training",
     description: "Platforms supporting structured learning and institutional operations.",
-    imageSrc: "/Image (Education & Coaching).png",
+    imageSrc: "/training.jpg",
   },
   {
     title: "Healthcare & Medical",
     description: "Operational systems designed around clinical and administrative workflows.",
-    imageSrc: "/Image (Wellness & Healthcare).png",
+    imageSrc: "/healthcare.png",
   },
   {
     title: "Retail & Commerce",
     description: "End-to-end commerce platforms built for evolving retail environments.",
-    imageSrc: "/Image (Gig & Freelance Ecosystems).png",
+    imageSrc: "/retail.jpg",
   },
   {
     title: "Professional Services",
     description: "Tools and platforms for consultancy, advisory, and service-based operations.",
-    imageSrc: "/Image (Professional Services).png",
+    imageSrc: "/professional.jpg",
   },
 ];
 
@@ -108,7 +108,6 @@ export default function IndustriesWeWorkWith() {
       <style>{`
         .iww-section {
           position: relative; width: 100%;
-          padding: 80px 24px;
           background: #f5f8ff;
           overflow: hidden;
         }
@@ -122,7 +121,7 @@ export default function IndustriesWeWorkWith() {
           pointer-events: none; z-index: 0;
         }
 
-        .iww-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 2; }
+        .iww-inner { position: relative; z-index: 2; }
 
         /* Badge */
         .iww-badge {
@@ -226,14 +225,14 @@ export default function IndustriesWeWorkWith() {
         .iww-dot { position: absolute; border-radius: 50%; background: #009FE3; opacity: .09; pointer-events: none; }
       `}</style>
 
-      <section ref={sectionRef} className="iww-section">
+      <section ref={sectionRef} className="iww-section section-wrap">
         {/* Scatter dots */}
         <span className="iww-dot" style={{ width: 8, height: 8, top: "20%", left: "8%" }} />
         <span className="iww-dot" style={{ width: 6, height: 6, top: "65%", left: "5%" }} />
         <span className="iww-dot" style={{ width: 7, height: 7, top: "15%", right: "10%" }} />
         <span className="iww-dot" style={{ width: 5, height: 5, top: "80%", right: "8%" }} />
 
-        <div className="iww-inner">
+        <div className="section-inner iww-inner">
           <div style={{ textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: 18 }}>
               <span ref={(el) => { headerRefs.current[0] = el; }} className="iww-badge">

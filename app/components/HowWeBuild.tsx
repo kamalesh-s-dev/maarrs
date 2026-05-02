@@ -119,14 +119,13 @@ export default function HowWeBuild() {
         /* ── Section ── */
         .hwb-section {
           position: relative; width: 100%;
-          padding: 80px 24px;
           background: #f5f8ff;
           overflow: hidden;
         }
         /* Matching radial bg from WhatWeBuild / HowPlatformsServe */
         
 
-        .hwb-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 2; }
+        .hwb-inner { max-width: 1240px; margin-inline: auto; padding-inline: clamp(24px, 3vw, 80px); position: relative; z-index: 2; }
 
         /* Badge */
         .hwb-badge {
@@ -148,7 +147,7 @@ export default function HowWeBuild() {
           color: #0f172a; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 14px;
         }
         .hwb-blue { color: #009FE3; }
-        .hwb-sub { font-size: 1rem; color: #64748b; line-height: 1.75; max-width: 500px; margin: 0 auto 52px; }
+        .hwb-sub { font-size: 1rem; color: #64748b; line-height: 1.75; max-width: 580px; margin: 0 auto 52px; }
 
         /* ── Row ── */
         .hwb-row { display: flex; flex-direction: row; gap: 12px; height: 330px; }
@@ -313,8 +312,26 @@ export default function HowWeBuild() {
         .hwb-dot { position: absolute; border-radius: 50%; background: #009FE3; opacity: .09; pointer-events: none; }
       `}</style>
 
-      <section ref={sectionRef} className="hwb-section">
-        {/* Soft glow blobs */}
+      <section ref={sectionRef} className="hwb-section section-wrap">
+        {/* Background aesthetics */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {/* Radial Dot Grid */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#009FE3 1.5px, transparent 1.5px)', backgroundSize: '40px 40px' }} />
+
+          {/* Floating Orbs / Glows */}
+          <div className="absolute top-0 left-0 w-[50vw] h-[50vw] bg-gradient-to-tr from-[#009FE3]/8 to-transparent rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-0 w-[50vw] h-[50vw] bg-gradient-to-tl from-[#0891b2]/8 to-transparent rounded-full blur-[100px]" />
+
+          {/* Diagonal Slash Pattern */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.02]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="diagonal-slash-hwb" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M-10,10 l20,-20 M0,40 l40,-40 M30,50 l20,-20" stroke="#009FE3" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#diagonal-slash-hwb)" />
+          </svg>
+        </div>
 
         {/* Scatter dots */}
         <span className="hwb-dot" style={{ width: 8, height: 8, top: "10%", left: "6%" }} />
@@ -322,22 +339,72 @@ export default function HowWeBuild() {
         <span className="hwb-dot" style={{ width: 7, height: 7, top: "18%", right: "8%" }} />
         <span className="hwb-dot" style={{ width: 5, height: 5, top: "72%", right: "5%" }} />
 
-        <div className="hwb-inner">
+        <div className="section-inner">
           {/* Header */}
-          <div style={{ textAlign: "center" }}>
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: 18 }}>
-              <span className="hwb-badge hwb-hdr">
-                <span className="hwb-badge-dot" />
-                Our Approach
-              </span>
+          <div style={{ textAlign: "center", position: "relative", paddingTop: 8, overflow: "hidden" }}>
+
+            {/* Shared SVG defs */}
+            <svg width="0" height="0" style={{ position: "absolute" }}>
+              <defs>
+                <filter id="hwbHalfGlow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+              </defs>
+            </svg>
+
+            {/* ── RIGHT corner only — orbital anchored at right edge ── */}
+            {/* <div style={{
+              position: "absolute", top: 0, right: 0,
+              width: "52%", height: "100%",
+              overflow: "hidden", pointerEvents: "none", zIndex: 0,
+            }}>
+              <svg
+                style={{ position: "absolute", top: "50%", right: 0, transform: "translateY(-50%)", overflow: "visible" }}
+                width="440" height="440" viewBox="0 -220 440 440"
+              >
+                <circle cx="0" cy="0" r="110" fill="none"
+                  stroke="#009FE3" strokeWidth="1.1" strokeDasharray="4 5" opacity="0.4" />
+                <circle r="3" fill="#009FE3" opacity="0.85" filter="url(#hwbHalfGlow)">
+                  <animateMotion dur="9s" repeatCount="indefinite" begin="-3s"
+                    path="M -110,0 A 110,110 0 1,1 110,0 A 110,110 0 1,1 -110,0" />
+                </circle>
+
+                <circle cx="0" cy="0" r="190" fill="none"
+                  stroke="#009FE3" strokeWidth="0.85" strokeDasharray="3 6" opacity="0.27" />
+                <circle r="2.5" fill="#00b4d8" opacity="0.75" filter="url(#hwbHalfGlow)">
+                  <animateMotion dur="14s" repeatCount="indefinite" begin="-7s"
+                    path="M -190,0 A 190,190 0 1,1 190,0 A 190,190 0 1,1 -190,0" />
+                </circle>
+
+                <circle cx="0" cy="0" r="270" fill="none"
+                  stroke="#009FE3" strokeWidth="0.65" strokeDasharray="2 7" opacity="0.17" />
+                <circle r="2" fill="#009FE3" opacity="0.6" filter="url(#hwbHalfGlow)">
+                  <animateMotion dur="20s" repeatCount="indefinite"
+                    path="M -270,0 A 270,270 0 1,1 270,0 A 270,270 0 1,1 -270,0" />
+                </circle>
+
+                <circle cx="0" cy="0" r="7" fill="#009FE3" opacity="0.12" />
+                <circle cx="0" cy="0" r="3" fill="#009FE3" opacity="0.38" />
+              </svg>
+            </div> */}
+
+            {/* Text — above orbital layer */}
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: 18 }}>
+                <span className="hwb-badge hwb-hdr">
+                  <span className="hwb-badge-dot" />
+                  Our Approach
+                </span>
+              </div>
+              <h2 className="hwb-heading hwb-hdr">
+                How we <span className="hwb-blue">build</span>
+              </h2>
+              <p className="hwb-sub hwb-hdr">
+                MAARRS follows a structured platform development approach focused on operational
+                understanding, scalable architecture, and long-term adaptability.
+              </p>
             </div>
-            <h2 className="hwb-heading hwb-hdr">
-              How we <span className="hwb-blue">build</span>
-            </h2>
-            <p className="hwb-sub hwb-hdr">
-              MAARRS follows a structured platform development approach focused on operational
-              understanding, scalable architecture, and long-term adaptability.
-            </p>
           </div>
 
           {/* Cards */}

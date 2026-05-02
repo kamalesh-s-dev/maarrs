@@ -4,11 +4,9 @@ interface GutterDecoratedProps {
   children: React.ReactNode;
   arcSide?: 'left' | 'right' | 'both' | 'none';
   dotCluster?: 'left' | 'right' | 'both' | 'none';
-  cornerMarks?: boolean;
   gridEdges?: boolean;
   verticalLabel?: string;
   sectionBadge?: string;
-  crossMarks?: boolean;
   ghostNumber?: string;
   watermarkText?: string;
   glowLeak?: 'left' | 'right' | 'both' | 'none';
@@ -21,11 +19,9 @@ export default function GutterDecorated({
   children,
   arcSide = 'none',
   dotCluster = 'none',
-  cornerMarks = false,
   gridEdges = false,
   verticalLabel,
   sectionBadge,
-  crossMarks = false,
   ghostNumber,
   watermarkText,
   glowLeak = 'none',
@@ -34,39 +30,18 @@ export default function GutterDecorated({
   className = '',
 }: GutterDecoratedProps) {
   return (
-    <div className={`relative w-full ${className}`}>
+    <div className={`relative w-full overflow-hidden ${className}`}>
       {/* Main Content */}
       <div className="relative z-10">
         {children}
       </div>
 
-      {/* Decorative Overlay - Sits under the pointer-events-none layer but behind main text */}
-      <div className="absolute inset-0 pointer-events-none z-[5] mix-blend-multiply">
-        {/* Glow / Light Leak */}
-        {(glowLeak === 'left' || glowLeak === 'both') && (
-          <div className="absolute top-[20%] left-[-15%] w-[50vw] h-[50vw] bg-[#009FE3] rounded-full mix-blend-normal filter blur-[100px] opacity-[0.04] animate-pulse-slow" />
-        )}
-        {(glowLeak === 'right' || glowLeak === 'both') && (
-          <div className="absolute top-[60%] right-[-15%] w-[50vw] h-[50vw] bg-[#7c3aed] rounded-full mix-blend-normal filter blur-[100px] opacity-[0.04] animate-pulse-slow" />
-        )}
-        
-        {/* Ghost Number */}
-        {ghostNumber && (
-          <div className="absolute bottom-[-5%] left-[-2%] text-[25vw] font-black text-slate-800 leading-none opacity-[0.02] select-none tracking-tighter">
-            {ghostNumber}
-          </div>
-        )}
-        
-        {/* Watermark Text */}
-        {watermarkText && (
-          <div className="absolute top-[10%] right-[-5%] text-[10vw] font-black text-slate-800 leading-none opacity-[0.02] select-none tracking-tight whitespace-nowrap -rotate-90 origin-bottom-right">
-            {watermarkText}
-          </div>
-        )}
-      </div>
+      {/* ── Decorative layer (z-0, pointer-events-none) ─────────── */}
+      <div className="absolute inset-0 pointer-events-none z-[0]">
 
-      <div className="absolute inset-0 pointer-events-none z-[50]">
-        
+        {/* Always-on subtle ambient radial — gives every section a soft abstract wash */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(0,159,227,0.05)_0%,transparent_70%)]" />
+
         {/* Scan Line */}
         {scanLine && (
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#009FE3]/30 to-transparent shadow-[0_0_8px_rgba(0,159,227,0.5)] opacity-50 scan-line-anim hidden md:block" />
@@ -75,63 +50,64 @@ export default function GutterDecorated({
         {/* Grid Edges */}
         {gridEdges && (
           <>
-            <div className="absolute top-0 bottom-0 left-[3%] w-[1px] bg-gradient-to-b from-transparent via-[#009FE3]/20 to-transparent hidden md:block" />
-            <div className="absolute top-0 bottom-0 right-[3%] w-[1px] bg-gradient-to-b from-transparent via-[#009FE3]/20 to-transparent hidden md:block" />
+            <div className="absolute top-0 bottom-0 left-[3%] w-[1px] bg-gradient-to-b from-transparent via-[#009FE3]/25 to-transparent hidden md:block" />
+            <div className="absolute top-0 bottom-0 right-[3%] w-[1px] bg-gradient-to-b from-transparent via-[#009FE3]/25 to-transparent hidden md:block" />
           </>
         )}
-        
 
+        {/* Glow / Light Leak — mix-blend-normal so visible on any background */}
+        {(glowLeak === 'left' || glowLeak === 'both') && (
+          <div className="absolute top-[10%] left-0 w-[45vw] h-[45vw] bg-[#009FE3] rounded-full filter blur-[120px] opacity-[0.07] animate-pulse-slow" />
+        )}
+        {(glowLeak === 'right' || glowLeak === 'both') && (
+          <div className="absolute bottom-[10%] right-0 w-[45vw] h-[45vw] bg-[#0077b6] rounded-full filter blur-[120px] opacity-[0.06] animate-pulse-slow" />
+        )}
 
-        {/* Side Arcs */}
-        {arcSide === 'left' || arcSide === 'both' ? (
-          <div className="absolute top-1/2 left-[-20%] md:left-[-15%] xl:left-[-10%] w-[40vw] h-[80vh] rounded-[100%] border-[1px] border-[#009FE3]/15 -translate-y-1/2 hidden lg:block" />
-        ) : null}
-        {arcSide === 'right' || arcSide === 'both' ? (
-          <div className="absolute top-1/2 right-[-20%] md:right-[-15%] xl:right-[-10%] w-[40vw] h-[80vh] rounded-[100%] border-[1px] border-[#009FE3]/15 -translate-y-1/2 hidden lg:block" />
-        ) : null}
-        
-        {/* Concentric Rings */}
+        {/* Side Arcs — inset so overflow-hidden keeps them visible */}
+        {(arcSide === 'left' || arcSide === 'both') && (
+          <div className="absolute top-1/2 left-[-8%] w-[36vw] h-[80vh] rounded-[100%] border border-[#009FE3]/20 -translate-y-1/2 hidden lg:block" />
+        )}
+        {(arcSide === 'right' || arcSide === 'both') && (
+          <div className="absolute top-1/2 right-[-8%] w-[36vw] h-[80vh] rounded-[100%] border border-[#009FE3]/20 -translate-y-1/2 hidden lg:block" />
+        )}
+
+        {/* Concentric Rings — lowered breakpoint to lg so they show on normal screens */}
         {(concentricRings === 'left' || concentricRings === 'both') && (
-          <div className="absolute top-1/2 left-[-15%] w-[600px] h-[600px] border-[1px] border-[#009FE3]/10 rounded-full -translate-y-1/2 hidden 2xl:flex items-center justify-center">
-            <div className="w-[500px] h-[500px] border-[1px] border-dashed border-[#009FE3]/20 rounded-full animate-[spin_60s_linear_infinite]" />
-            <div className="absolute w-[400px] h-[400px] border-[1px] border-[#009FE3]/10 rounded-full" />
+          <div className="absolute top-1/2 left-[-10%] w-[500px] h-[500px] border border-[#009FE3]/12 rounded-full -translate-y-1/2 hidden lg:flex items-center justify-center">
+            <div className="w-[400px] h-[400px] border border-dashed border-[#009FE3]/15 rounded-full animate-[spin_60s_linear_infinite]" />
+            <div className="absolute w-[300px] h-[300px] border border-[#009FE3]/10 rounded-full" />
           </div>
         )}
         {(concentricRings === 'right' || concentricRings === 'both') && (
-          <div className="absolute top-1/2 right-[-15%] w-[600px] h-[600px] border-[1px] border-[#009FE3]/10 rounded-full -translate-y-1/2 hidden 2xl:flex items-center justify-center">
-            <div className="w-[500px] h-[500px] border-[1px] border-dashed border-[#009FE3]/20 rounded-full animate-[spin_60s_linear_infinite]" />
-            <div className="absolute w-[400px] h-[400px] border-[1px] border-[#009FE3]/10 rounded-full" />
+          <div className="absolute top-1/2 right-[-10%] w-[500px] h-[500px] border border-[#009FE3]/12 rounded-full -translate-y-1/2 hidden lg:flex items-center justify-center">
+            <div className="w-[400px] h-[400px] border border-dashed border-[#009FE3]/15 rounded-full animate-[spin_60s_linear_infinite]" />
+            <div className="absolute w-[300px] h-[300px] border border-[#009FE3]/10 rounded-full" />
           </div>
         )}
 
-        {/* Dot Cluster */}
+        {/* Dot Cluster — lowered breakpoint to lg */}
         {(dotCluster === 'left' || dotCluster === 'both') && (
-          <div className="absolute top-[15%] left-[2%] opacity-40 hidden 2xl:block">
+          <div className="absolute top-[12%] left-[1.5%] opacity-30 hidden lg:block">
             <DotGrid />
           </div>
         )}
         {(dotCluster === 'right' || dotCluster === 'both') && (
-          <div className="absolute bottom-[15%] right-[2%] opacity-40 hidden 2xl:block">
+          <div className="absolute bottom-[12%] right-[1.5%] opacity-30 hidden lg:block">
             <DotGrid />
           </div>
         )}
 
-        {/* Cross Marks */}
-        {crossMarks && (
-          <>
-            <CrossMark top="12%" left="6%" />
-            <CrossMark bottom="15%" right="6%" />
-            <CrossMark top="45%" right="5%" />
-          </>
+        {/* Ghost Number */}
+        {ghostNumber && (
+          <div className="absolute bottom-[-5%] left-[-2%] text-[25vw] font-black text-slate-800 leading-none opacity-[0.02] select-none tracking-tighter">
+            {ghostNumber}
+          </div>
         )}
 
-        {/* Corner Marks */}
-        {cornerMarks && (
-          <div className="absolute inset-[3.5%] hidden xl:block">
-             <div className="absolute top-0 left-0 w-[24px] h-[24px] border-t-[1.5px] border-l-[1.5px] border-[#009FE3]/30" />
-             <div className="absolute top-0 right-0 w-[24px] h-[24px] border-t-[1.5px] border-r-[1.5px] border-[#009FE3]/30" />
-             <div className="absolute bottom-0 left-0 w-[24px] h-[24px] border-b-[1.5px] border-l-[1.5px] border-[#009FE3]/30" />
-             <div className="absolute bottom-0 right-0 w-[24px] h-[24px] border-b-[1.5px] border-r-[1.5px] border-[#009FE3]/30" />
+        {/* Watermark Text */}
+        {watermarkText && (
+          <div className="absolute top-[10%] right-[-5%] text-[10vw] font-black text-slate-800 leading-none opacity-[0.02] select-none tracking-tight whitespace-nowrap -rotate-90 origin-bottom-right">
+            {watermarkText}
           </div>
         )}
 
@@ -151,6 +127,7 @@ export default function GutterDecorated({
           <div className="flex-1" />
         </div>
       </div>
+
       <style>{`
         @keyframes scanLineAnim {
           0% { transform: translateY(-100vh); }
@@ -160,8 +137,8 @@ export default function GutterDecorated({
           animation: scanLineAnim 12s linear infinite;
         }
         @keyframes pulseSlow {
-          0%, 100% { opacity: 0.03; transform: scale(1); }
-          50% { opacity: 0.05; transform: scale(1.05); }
+          0%, 100% { opacity: 0.06; transform: scale(1); }
+          50% { opacity: 0.10; transform: scale(1.06); }
         }
         .animate-pulse-slow {
           animation: pulseSlow 8s ease-in-out infinite;
@@ -172,7 +149,7 @@ export default function GutterDecorated({
 }
 
 const DotGrid = () => (
-  <svg width="40" height="90" xmlns="http://www.w3.org/2000/svg">
+  <svg width="60" height="120" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
         <circle fill="#009FE3" cx="2" cy="2" r="1.5"></circle>
@@ -180,13 +157,4 @@ const DotGrid = () => (
     </defs>
     <rect x="0" y="0" width="100%" height="100%" fill="url(#dots)"></rect>
   </svg>
-);
-
-const CrossMark = ({ top, bottom, left, right }: any) => (
-  <div className="absolute hidden lg:block opacity-30" style={{ top, bottom, left, right }}>
-    <div className="relative w-[18px] h-[18px]">
-      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#009FE3] -translate-y-1/2" />
-      <div className="absolute left-1/2 top-0 h-full w-[1px] bg-[#009FE3] -translate-x-1/2" />
-    </div>
-  </div>
 );

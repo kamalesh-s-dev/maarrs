@@ -82,7 +82,7 @@ export default function Careers() {
   ];
 
   return (
-    <section ref={sectionRef} className="w-full py-20 bg-[#f8fbff] relative overflow-hidden" id="careers">
+    <section ref={sectionRef} className="w-full section-wrap bg-[#f8fbff] relative overflow-hidden" id="careers">
       {/* Background decorations */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Fine Crosshatch Grid */}
@@ -98,7 +98,7 @@ export default function Careers() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] border-[1px] border-[#009FE3]/5 rounded-[100%]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="section-inner">
         {/* Header */}
         <div className="car-header text-center max-w-3xl mx-auto mb-16 md:mb-20">
           <div className="flex justify-center mb-4">

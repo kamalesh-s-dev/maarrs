@@ -62,15 +62,15 @@ const CARDS = [
    COMPONENT
 ═══════════════════════════════════════════════════════════════ */
 export default function WhatWeBuild() {
-  const sectionRef   = useRef<HTMLElement>(null);
-  const badgeRef     = useRef<HTMLSpanElement>(null);
-  const headingRef   = useRef<HTMLHeadingElement>(null);
-  const subtitleRef  = useRef<HTMLParagraphElement>(null);
-  const gridRef      = useRef<HTMLDivElement>(null);
-  const cardRefs     = useRef<(HTMLDivElement | null)[]>([]);
-  const iconRefs     = useRef<(HTMLDivElement | null)[]>([]);
-  const dividerRefs  = useRef<(HTMLDivElement | null)[]>([]);
-  const dotRefs      = useRef<(HTMLSpanElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const badgeRef = useRef<HTMLSpanElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dividerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -198,24 +198,26 @@ export default function WhatWeBuild() {
         .wwb-section {
           position: relative;
           width: 100%;
-          padding: 80px 24px;
           background: transparent;
+          overflow: hidden;
         }
         .wwb-section::before {
           content: "";
           position: absolute;
-          top: -100px; left: -140px;
+          top: -100px; left: 0;
           width: 520px; height: 520px;
           background: radial-gradient(circle, rgba(0,159,227,0.08) 0%, transparent 70%);
           pointer-events: none; z-index: 0;
+          transform: translateX(-30%);
         }
         .wwb-section::after {
           content: "";
           position: absolute;
-          bottom: -80px; right: -100px;
+          bottom: -80px; right: 0;
           width: 440px; height: 440px;
           background: radial-gradient(circle, rgba(0,159,227,0.07) 0%, transparent 70%);
           pointer-events: none; z-index: 0;
+          transform: translateX(30%);
         }
 
         /* ── Badge ── */
@@ -261,7 +263,7 @@ export default function WhatWeBuild() {
           font-size: 1.05rem;
           color: #64748b;
           line-height: 1.75;
-          max-width: 530px;
+          max-width: 580px;
           margin: 0 auto;
         }
 
@@ -397,16 +399,16 @@ export default function WhatWeBuild() {
         }
       `}</style>
 
-      <section id="about" ref={sectionRef} className="wwb-section">
+      <section id="about" ref={sectionRef} className="wwb-section section-wrap">
 
         {/* Scattered background dots — animated by GSAP */}
         {[
-          { w: 6,  h: 6,  top: "16%", left: "7%"  },
-          { w: 5,  h: 5,  top: "40%", left: "13%" },
-          { w: 7,  h: 7,  top: "68%", left: "5%"  },
-          { w: 5,  h: 5,  top: "20%", right: "9%" },
-          { w: 6,  h: 6,  top: "54%", right: "6%" },
-          { w: 4,  h: 4,  top: "78%", right: "17%"},
+          { w: 6, h: 6, top: "16%", left: "7%" },
+          { w: 5, h: 5, top: "40%", left: "13%" },
+          { w: 7, h: 7, top: "68%", left: "5%" },
+          { w: 5, h: 5, top: "20%", right: "9%" },
+          { w: 6, h: 6, top: "54%", right: "6%" },
+          { w: 4, h: 4, top: "78%", right: "17%" },
         ].map((d, i) => (
           <span
             key={i}
@@ -416,7 +418,7 @@ export default function WhatWeBuild() {
           />
         ))}
 
-        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 2 }}>
+        <div className="section-inner">
 
           {/* ── Header ── */}
           <div style={{ textAlign: "center" }}>
